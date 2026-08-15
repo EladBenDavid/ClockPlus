@@ -104,9 +104,20 @@ public abstract class RingtoneService<T extends Parcelable> extends Service {
     protected abstract boolean doesVibrate();
 
     /**
-     * @return the number of minutes to keep ringing before auto silence
+     * @return the number of seconds to keep ringing before auto stop
      */
-    protected abstract int minutesToAutoSilence();
+    protected int secondsToAutoStop() {
+        // Default: 3 seconds for auto-stop
+        return 3;
+    }
+
+    /**
+     * @return the number of minutes to keep ringing before auto silence (deprecated, use secondsToAutoStop instead)
+     */
+    protected int minutesToAutoSilence() {
+        // Default fallback for backward compatibility
+        return 15;
+    }
 
     /**
      * @return An implementation of {@link android.os.Parcelable.Creator} that can create
@@ -151,9 +162,9 @@ public abstract class RingtoneService<T extends Parcelable> extends Service {
                             500 // millis to keep on before turning off
                     }, 2 /* start repeating at this index of the array, after one cycle */);
                 }
-                // Schedule auto silence
+                // Schedule auto silence using seconds
                 mSilenceHandler.postDelayed(mSilenceRunnable,
-                        TimeUnit.MINUTES.toMillis(minutesToAutoSilence()));
+                        TimeUnit.SECONDS.toMillis(secondsToAutoStop()));
             }
         }
         // If killed while started, don't recreate. Should be sufficient.

@@ -107,8 +107,8 @@ public class AlarmRingtoneService extends RingtoneService<Alarm> {
     }
 
     @Override
-    protected int minutesToAutoSilence() {
-        return AlarmPreferences.minutesToSilenceAfter(this);
+    protected int secondsToAutoStop() {
+        return AlarmPreferences.autoStopAlarmDuration(this);
     }
 
     @Override

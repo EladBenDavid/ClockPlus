@@ -70,6 +70,14 @@
             android:entryValues="@array/values_duration"
             android:defaultValue="10"
             android:summary="%s"/>
+        <ListPreference
+            android:key="@string/key_auto_stop_alarm_duration"
+            android:title="@string/title_auto_stop_alarm"
+            android:dialogTitle="@string/title_auto_stop_alarm"
+            android:entries="@array/entries_auto_stop_duration"
+            android:entryValues="@array/values_auto_stop_duration"
+            android:defaultValue="3"
+            android:summary="%s"/>
         <Preference
             android:key="@string/key_alarm_volume"
             android:title="@string/title_alarm_volume"/>
